@@ -14,3 +14,8 @@ export function query (params) {
   const dynamoDb = new AWS.DynamoDB.DocumentClient()
   return dynamoDb.query(params).promise()
 }
+
+export function update (params) {
+  const dynamoDb = new AWS.DynamoDB.DocumentClient()
+  return dynamoDb.update(params).promise()
+}
