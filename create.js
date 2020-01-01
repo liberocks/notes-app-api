@@ -1,11 +1,10 @@
 const uuid = require('uuid')
-const AWS = require('aws-sdk')
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamo = require('./libs/dynamodb-lib')
+const { success, failure } = require('./libs/response-lib')
 
-export async function main (event, context, callback) {
+export async function main (event, context) {
   const data = JSON.parse(event.body)
-
   const params = {
     TableName: process.env.tableName,
     Item: {
@@ -13,29 +12,16 @@ export async function main (event, context, callback) {
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      updatedAt: Date.now()
     }
   }
 
-  // Set response headers to enable CORS (Cross-Origin Resource Sharing)
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
-  }
-
-  let response = {}
   try {
-    await dynamoDb.put(params).promise()
-    response = params.Item
+    await dynamo.put(params)
+    return success(params.Item)
   } catch (error) {
-    console.log(error)
-
-    response = {
-      statusCode: 500,
-      headers: headers,
-      body: JSON.stringify({ status: false })
-    }
+    console.error(error)
+    return failure({ status: false })
   }
-
-  callback(null, response)
 }
