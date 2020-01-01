@@ -9,3 +9,8 @@ export function get (params) {
   const dynamoDb = new AWS.DynamoDB.DocumentClient()
   return dynamoDb.get(params).promise()
 }
+
+export function query (params) {
+  const dynamoDb = new AWS.DynamoDB.DocumentClient()
+  return dynamoDb.query(params).promise()
+}
