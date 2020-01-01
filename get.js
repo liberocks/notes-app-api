@@ -1,25 +1,20 @@
 const dynamo = require('./libs/dynamodb-lib')
 const { success, failure } = require('./libs/response-lib')
 
-const uuid = require('uuid')
-
 export async function main (event, context) {
-  const data = JSON.parse(event.body)
   const params = {
     TableName: process.env.tableName,
-    Item: {
+    Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
-      attachment: data.attachment,
-      createdAt: Date.now(),
-      updatedAt: Date.now()
+      noteId: event.pathParameters.id
     }
   }
 
   try {
-    await dynamo.put(params)
-    return success(params.Item)
+    const result = await dynamo.get(params)
+
+    if (result.Item) return success(result.Item)
+    else return failure({ status: false, error: 'Item not found.' })
   } catch (error) {
     console.error(error)
     return failure({ status: false })
