@@ -1,5 +1,5 @@
-const dynamo = require('./libs/dynamodb-lib')
-const { success, failure } = require('./libs/response-lib')
+const dynamo = require('../libs/dynamodb-lib')
+const { success, failure } = require('../libs/response-lib')
 
 export async function main (event, context) {
   const params = {

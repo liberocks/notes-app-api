@@ -1,6 +1,5 @@
-const dynamo = require('./libs/dynamodb-lib')
-const { success, failure } = require('./libs/response-lib')
-
+const dynamo = require('../libs/dynamodb-lib')
+const { success, failure } = require('../libs/response-lib')
 const uuid = require('uuid')
 
 export async function main (event, context) {

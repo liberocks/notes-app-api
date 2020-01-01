@@ -32,7 +32,7 @@ iamRoleStatements:
 
 functions:
   create:
-    handler: create.main
+    handler: functions/create.main
     events:
       - http:
           path: notes
@@ -40,7 +40,7 @@ functions:
           cors: true
           authorizer: aws_iam
   get:
-    handler: get.main
+    handler: functions/get.main
     events:
       - http:
           path: notes/{id}
@@ -48,7 +48,7 @@ functions:
           cors: true
           authorizer: aws_iam
   list:
-    handler: list.main
+    handler: functions/list.main
     events:
       - http:
           path: notes-app-api
