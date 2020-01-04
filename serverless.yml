@@ -15,21 +15,21 @@ provider:
   stage: dev
   region: ap-southeast-1
 
-environment:
-  TABLE_NAME: ${env:TABLE_NAME}
-  STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}
+  environment:
+    TABLE_NAME: ${env:TABLE_NAME}
+    STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}
 
-iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - dynamodb:DescribeTable
-      - dynamodb:Query
-      - dynamodb:Scan
-      - dynamodb:GetItem
-      - dynamodb:PutItem
-      - dynamodb:UpdateItem
-      - dynamodb:DeleteItem
-    Resource: "arn:aws:dynamodb:ap-southeast-1:*:*"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:ap-southeast-1:*:*"
 
 functions:
   create:
