@@ -1,5 +1,5 @@
 const stripePackage = require('stripe')
-const { calculateCost } = require('./libs/billing')
+const { calculateCost } = require('../libs/billing')
 const { success, failure } = require('../libs/responses')
 
 export async function main (event, context) {
