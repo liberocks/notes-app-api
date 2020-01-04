@@ -1,5 +1,5 @@
-const dynamo = require('../libs/dynamodb-lib')
-const { success, failure } = require('../libs/response-lib')
+const dynamo = require('../libs/dynamo')
+const { success, failure } = require('../libs/responses')
 const uuid = require('uuid')
 
 export async function main (event, context) {
@@ -17,7 +17,7 @@ export async function main (event, context) {
   }
 
   try {
-    await dynamo.put(params)
+    await dynamo.call('put', params)
     return success(params.Item)
   } catch (error) {
     console.error(error)

@@ -1,5 +1,5 @@
-const dynamo = require('../libs/dynamodb-lib')
-const { success, failure } = require('../libs/response-lib')
+const dynamo = require('../libs/dynamo')
+const { success, failure } = require('../libs/responses')
 
 export async function main (event, context) {
   const data = JSON.parse(event.body)
@@ -19,7 +19,7 @@ export async function main (event, context) {
   }
 
   try {
-    await dynamo.update(params)
+    await dynamo.call('update', params)
     return success({ status: true })
   } catch (error) {
     console.error(error)

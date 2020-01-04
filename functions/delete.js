@@ -11,12 +11,9 @@ export async function main (event, context) {
   }
 
   try {
-    const result = await dynamo.call('get', params)
-
-    if (result.Item) return success(result.Item)
-    else return failure({ status: false, error: 'Item not found.' })
-  } catch (error) {
-    console.error(error)
+    await dynamo.call('delete', params)
+    return success({ status: true })
+  } catch (e) {
     return failure({ status: false })
   }
 }

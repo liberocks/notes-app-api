@@ -1,5 +1,5 @@
-const dynamo = require('../libs/dynamodb-lib')
-const { success, failure } = require('../libs/response-lib')
+const dynamo = require('../libs/dynamo')
+const { success, failure } = require('../libs/responses')
 
 export async function main (event, context) {
   const params = {
@@ -11,7 +11,7 @@ export async function main (event, context) {
   }
 
   try {
-    const result = await dynamo.query(params)
+    const result = await dynamo.call('query', params)
 
     return success(result.Items)
   } catch (error) {
