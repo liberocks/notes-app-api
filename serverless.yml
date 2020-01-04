@@ -16,7 +16,8 @@ provider:
   region: ap-southeast-1
 
 environment:
-  tableName: notes
+  tableName: ${env:TABLE_NAME}
+  stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 
 iamRoleStatements:
   - Effect: Allow
