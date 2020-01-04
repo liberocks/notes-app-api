@@ -16,8 +16,8 @@ provider:
   region: ap-southeast-1
 
 environment:
-  tableName: ${env:TABLE_NAME}
-  stripeSecretKey: ${env:STRIPE_SECRET_KEY}
+  TABLE_NAME: ${env:TABLE_NAME}
+  STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}
 
 iamRoleStatements:
   - Effect: Allow

@@ -4,7 +4,7 @@ const { success, failure } = require('../libs/responses')
 export async function main (event, context) {
   const data = JSON.parse(event.body)
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.TABLE_NAME,
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
       noteId: event.pathParameters.id
