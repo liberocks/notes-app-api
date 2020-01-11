@@ -12,7 +12,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: dev
+  stage: ${env:STAGE}
   region: ap-southeast-1
 
   environment:
